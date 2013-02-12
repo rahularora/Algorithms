@@ -1,40 +1,41 @@
 package Stack;
 
-public class StackLL {
+public class StackLL <Item>{
 	
 	Node first;
 	
+	@SuppressWarnings("unchecked")
 	public StackLL(){
-		 first = new Node("Null");
+		 first = new Node((Item) "Null");
 	}
 	
 	private class Node{
-		String item;
+		Item item;
 		Node next;
 		
-		public Node(String str){
+		public Node(Item str){
 			this.item = str;
 			this.next = null;
 		}
 		
-		public Node(String str, Node n){
+		public Node(Item str, Node n){
 			this.item = str;
 			this.next = n;
 		}
 	}
 	
-	public void push(String item){
+	public void push(Item item){
 		Node temp = new Node(item,first);
 		first = temp; 
 	}
 	
-	public String pop(){
+	public Item pop(){
 		if (!isEmpty()){
-			String popItem = first.item;
+			Item popItem = first.item;
 			first = first.next;
 			return popItem;
 		}
-		return "Stack is empty";
+		return null;
 	}
 
 	public boolean isEmpty(){
@@ -45,7 +46,7 @@ public class StackLL {
 	}
 	
 	public static void main(String[] args) {
-		StackLL stack = new StackLL();
+		StackLL<String> stack = new StackLL<String>();
 		stack.push("My");
 		stack.push("Name");
 		stack.push("is");
