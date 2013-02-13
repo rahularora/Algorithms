@@ -1,6 +1,8 @@
 package Stack;
 
-public class StackArr <Item>{
+import java.util.Iterator;
+
+public class StackArr <Item> implements Iterable <Item>{
 	
 	Item[] stack;
 	int size;
@@ -48,6 +50,29 @@ public class StackArr <Item>{
 		return true;
 	}
 	
+	public Iterator<Item> iterator() {
+		return new StackArrIterator();
+	}
+	
+	public class StackArrIterator implements Iterator<Item>{
+		private int i = size;
+		
+		public boolean hasNext() {
+			return i>0;
+		}
+
+		@Override
+		public Item next() {
+			return stack[--i];
+		}
+
+		@Override
+		public void remove() {
+			// Not supported
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		StackArr<String> stack = new StackArr<String>(20);
 		stack.push("My");
@@ -56,8 +81,11 @@ public class StackArr <Item>{
 		stack.push("Rahul");
 		
 		System.out.println(stack.pop());
-		System.out.println(stack.getSize());
 		stack.push("Anu");
 		System.out.println(stack.pop());
+		
+		for (String s:stack){
+			System.out.print(s + " , ");
+		}
 	}
 }

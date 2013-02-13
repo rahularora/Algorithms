@@ -1,6 +1,8 @@
 package Stack;
 
-public class StackLL <Item>{
+import java.util.Iterator;
+
+public class StackLL <Item> implements Iterable <Item>{
 	
 	Node first;
 	
@@ -45,6 +47,31 @@ public class StackLL <Item>{
 		return false;
 	}
 	
+	public Iterator<Item> iterator() {
+		return new StackListIterator ();
+	}
+	
+	public class StackListIterator implements Iterator <Item>{
+		private Node current = first;
+		@Override
+		public boolean hasNext() {
+			return current !=null;
+		}
+
+		@Override
+		public Item next() {
+			Item item = current.item;
+			current = current.next;
+			return item;
+		}
+
+		@Override
+		public void remove() {
+			// Not supported
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		StackLL<String> stack = new StackLL<String>();
 		stack.push("My");
@@ -54,5 +81,9 @@ public class StackLL <Item>{
 		System.out.println(stack.pop());
 		stack.push("Anu");
 		System.out.println(stack.pop());
+		
+		for (String s:stack){
+			System.out.print(s + " , ");
+		}
 	}
 }
