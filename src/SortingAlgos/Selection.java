@@ -1,21 +1,19 @@
-
-// N2 time but N for sorted array.
-// Good for partially sorted array
+// N2 time
 
 package SortingAlgos;
 
-public class Insertion {
+public class Selection {
 
 	public static void sort(Comparable[] arr){
 		int N = arr.length;
 		
 		for (int i=0; i<N ; i++){
-			for (int j=i; j>0; j--){
-				if (less (arr[j], arr[j-1]))
-					exch (arr, j, j-1);
-				else
-					break;
+			int min = i;
+			for (int j=i+1; j<N ; j++){
+				if (less(arr[j], arr[j+1]))
+					min = j;
 			}
+			exch (arr, i, min);
 		}
 	}
 
